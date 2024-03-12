@@ -51,3 +51,4 @@ antidote bundle binury/npm-script-shell-plugin
 
 - [ ] Suppress command-not-found error message if script matches
 - [ ] Options for handling namespace conflicts (e.g., `test`)
+- [ ] Facilitate installation through `npm i -g @pjshell/zsh`
