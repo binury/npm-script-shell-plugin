@@ -1,0 +1,19 @@
+{
+  "name": "npm-script-shell-plugin",
+  "version": "0.0.1",
+  "description": "[IN DEVELOPMENT] Run package.json scripts directly by name",
+  "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {},
+  "keywords": [
+    "npm",
+    "scripts",
+    "bash",
+    "zsh",
+    "shell"
+  ],
+  "author": "Robin Ury",
+  "license": "MIT"
+}
