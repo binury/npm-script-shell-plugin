@@ -1,12 +1,12 @@
 {
-  "name": "npm-script-shell-plugin",
-  "version": "0.0.1",
+  "name": "@pjshell/zsh",
+  "version": "0.0.2",
   "description": "[IN DEVELOPMENT] Run package.json scripts directly by name",
-  "main": "index.js",
-  "engines": {
-    "node": ">=18"
+  "main": "pjshell.zsh",
+  "repository": "https://github.com/binury/npm-script-shell-plugin",
+  "scripts": {
+    "my-script": "echo 'success'"
   },
-  "scripts": {},
   "keywords": [
     "npm",
     "scripts",
