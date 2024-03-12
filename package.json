@@ -1,11 +1,11 @@
 {
   "name": "@pjshell/zsh",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "[IN DEVELOPMENT] Run package.json scripts directly by name",
   "main": "pjshell.zsh",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/binury/npm-script-shell-plugin.git"
+    "url": "git+https://github.com/binury/pjshell"
   },
   "scripts": {
     "my-script": "echo 'success'"
