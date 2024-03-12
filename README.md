@@ -1,6 +1,6 @@
 # pjshell - package.json script shell
 
-Enables running package.json scripts _without_ needing to call `p/npm run` explicitly:
+Run your package.json scripts _without_ needing to call `p/npm run` explicitly:
 
 ```shell
 # Traditional
