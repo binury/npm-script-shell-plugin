@@ -5,7 +5,7 @@
 # set -o no_unset
 # set -o pipefail
 
-local script_matches_cmd
+# local script_matches_cmd
 
 # get_scripts <name_to_match>
 function get_scripts {
@@ -16,8 +16,8 @@ function get_scripts {
   for script in $scripts; do
     local script_name=${script%%=*}
     if [[ "$script_name" == "$1" ]]; then
-      local script_command=${script#*=}
-      script_matches_cmd=$script_command
+      # local script_command=${script#*=}
+      # script_matches_cmd=$script_command
       return 0
     fi
   done
@@ -35,7 +35,7 @@ function _pjshell {
   fi
 
 
-  if [[ ! -n $(command -v jq) ]]; then
+  if [[ ! -n $(command -v zq) ]]; then
     echo 'pjshell: warning - jq not found - is it installed?'
     echo 'disabling pjshell for this session'
     add-zsh-hook -d preexec _pjshell
