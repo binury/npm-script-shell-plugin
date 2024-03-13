@@ -24,7 +24,7 @@ function get_scripts {
   return 1
 }
 
-function _preexec {
+function _pjshell {
   if [[ ! -n $1 ]]; then
     return
   fi
@@ -37,12 +37,14 @@ function _preexec {
 
   if [[ ! -n $(command -v jq) ]]; then
     echo 'pjshell: warning - jq not found - is it installed?'
-    # TODO: unload hook?
+    echo 'disabling pjshell for this session'
+    add-zsh-hook -d preexec _pjshell
     return
   fi
   if [[ ! -n $(command -v npm) ]]; then
-    echo 'pjshell: warning - npm not found'
-    # TODO: unload hook?
+    echo -e 'pjshell: warning - npm not found'
+    echo 'Disabling pjshell for this session'
+    add-zsh-hook -d preexec _pjshell
     return
   fi
 
@@ -60,4 +62,4 @@ function _preexec {
 }
 
 autoload -U add-zsh-hook
-add-zsh-hook preexec _preexec
+add-zsh-hook preexec _pjshell
