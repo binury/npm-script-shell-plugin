@@ -34,6 +34,12 @@ function _preexec {
     return
   fi
 
+
+  if [[ ! -n $(command -v jq) ]]; then
+    echo 'pjshell: warning - jq not found - is it installed?'
+    # TODO: unload hook?
+    return
+  fi
   if [[ ! -n $(command -v npm) ]]; then
     echo 'pjshell: warning - npm not found'
     # TODO: unload hook?
