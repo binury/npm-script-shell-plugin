@@ -34,6 +34,16 @@ and must be installed. I might remove this requirement later…
 
 ## Installation
 
+### [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh/wiki/Customization#adding-a-new-plugin)
+
+```sh
+git clone https://github.com/binury/pjshell "$ZSH_CUSTOM/plugins/pjshell"
+# Edit your .zshrc plugins list or...
+echo "plugins+=(pjshell)" >> ~/.zshrc
+```
+
+### Manual
+
 ```sh
 # Manual
 git clone https://github.com/binury/pjshell pjshell && pushd $_;
@@ -42,9 +52,6 @@ cat <<PJ >> ~/.zshrc
 source $PWD/pjshell.zsh
 PJ
 popd;
-
-# Plugin managers (e.g., antidote)
-antidote bundle binury/pjshell
 ```
 
 ## To-do
