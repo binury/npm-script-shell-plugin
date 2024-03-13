@@ -36,7 +36,7 @@ and must be installed. I might remove this requirement later…
 
 ```sh
 # Manual
-git clone https://github.com/binury/npm-script-shell-plugin pjshell && pushd $_;
+git clone https://github.com/binury/pjshell pjshell && pushd $_;
 cat <<PJ >> ~/.zshrc
 # Load pjshell plugin
 source $PWD/pjshell.zsh
@@ -44,7 +44,7 @@ PJ
 popd;
 
 # Plugin managers (e.g., antidote)
-antidote bundle binury/npm-script-shell-plugin
+antidote bundle binury/pjshell
 ```
 
 ## To-do
