@@ -1,6 +1,6 @@
 # pjshell - package.json script shell
 
-Run your package.json scripts _without_ needing to call `p/npm run` explicitly:
+Run your package.json scripts _without_ needing to call `npm run` explicitly:
 
 ```shell
 # Traditional
@@ -12,20 +12,22 @@ success!
 # Convenient
 ❯ my-script
 zsh: command not found: my-script
-pjshell: Unknown command - falling back to npm-script: my-script 👍
+pjshell: falling back to npm-script: my-script
 
 > @pjshell/zsh@0.0.2 my-script
 success!
 
 # Supports script-name variant convention
 ❯ lint:style
-pjshell: Unknown command - falling back to npm-script: lint:style 👍
+pjshell: falling back to npm-script: lint:style
 
-# Supports passing flags
+# Supports passing args
 ❯ lint -- --format json
-pjshell: Unknown command - falling back to npm-script: lint 👍
+pjshell: falling back to npm-script: lint
 
 ```
+
+This zsh plugin is for users who want to use pjshell globally on projects they do not own or without having to [use the pjshell package to persistently link a project's scripts](#to-do).
 
 ## Requirements
 
@@ -59,3 +61,4 @@ popd;
 - [x] Suppress command-not-found error message if script matches
 - [ ] Options for handling namespace conflicts (e.g., `test`)
 - [ ] Facilitate installation through `npm i -g @pjshell/zsh`
+- [ ] use pjshell to link the scripts per-project
