@@ -1,14 +1,7 @@
 #!/usr/bin/env zsh
 
-# TODO: set these but locally?
-# set -o err_return
-# set -o no_unset
-# set -o pipefail
-
-# local script_matches_cmd
-
-# get_scripts <name_to_match>
-function get_scripts {
+# _get_scripts <name_to_match>
+function _get_scripts {
   # echo "arg: $1"
   # (f) splits newlines
   local scripts=("${(f)$(jq -r '.scripts | to_entries[] | "\(.key)=\(.value)"' package.json)}")
@@ -22,6 +15,22 @@ function get_scripts {
     fi
   done
   return 1
+}
+
+function _pjshell_link {
+  local scripts=("${(f)$(jq -r '.scripts | to_entries[] | "\(.key)=\(.value)"' package.json)}")
+  for script in $scripts; do
+    local script_name=${script%%=*}
+    local pjs_dir="./.pjs"; local local_pjs_dir="$pjs_dir:A"
+    [[ -d "$local_pjs_dir" ]] || mkdir "$local_pjs_dir"
+    local exec_path="$local_pjs_dir/$script_name"
+    [[ -f "$exec_path" ]] || echo "npm run $script_name" > "$exec_path" # TODO: What if this removed itself from the path too?
+    chmod +x "$exec_path" # It may not be possible to chmod depending on security settings :\
+  done
+}
+
+function _pjshell_cleanup {
+  rm -rf "./.pjs"
 }
 
 function _pjshell {
@@ -49,11 +58,9 @@ function _pjshell {
   fi
 
   if [[ -f "$PWD/package.json" ]]; then
-    get_scripts "$cmd"
+    _get_scripts "$cmd"
     script_found=$?
     if [[ script_found -eq 0 ]]; then
-      # verbose?
-      # echo "pjshell: Unknown command… falling back to npm-script: $cmd 👍"
       echo "pjshell: falling back to npm-script: $cmd"
       pjs_dir="./.pjs"; local_pjs_dir="$pjs_dir:A"
       [[ -d "$local_pjs_dir" ]] || mkdir "$local_pjs_dir"
