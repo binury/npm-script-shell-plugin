@@ -52,14 +52,22 @@ function _pjshell {
     get_scripts "$cmd"
     script_found=$?
     if [[ script_found -eq 0 ]]; then
-      echo "pjshell: Unknown command - falling back to npm-script: $cmd 👍"
-      # TODO: trap and prevent original command from running
-      eval "npm run $1"
+      # verbose?
+      # echo "pjshell: Unknown command… falling back to npm-script: $cmd 👍"
+      echo "pjshell: falling back to npm-script: $cmd"
+      pjs_dir="./.pjs"; local_pjs_dir="$pjs_dir:A"
+      [[ -d "$local_pjs_dir" ]] || mkdir "$local_pjs_dir"
+      exec_path="$local_pjs_dir/$1"
+      [[ -f "$exec_path" ]] || echo "npm run $1" > "$exec_path" # TODO: What if this removed itself from the path too?
+      chmod +x "$exec_path" # It may not be possible to chmod depending on security settings :\
+      export -U PATH=$local_pjs_dir${PATH:+:$PATH} # TODO: Verify export always possible?
     fi
   else
     return
   fi
 }
+
+# TODO: add a hook to remove the path from the PATH
 
 autoload -U add-zsh-hook
 add-zsh-hook preexec _pjshell
