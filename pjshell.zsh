@@ -57,17 +57,16 @@ function _pjshell {
       echo "pjshell: falling back to npm-script: $cmd"
       pjs_dir="./.pjs"; local_pjs_dir="$pjs_dir:A"
       [[ -d "$local_pjs_dir" ]] || mkdir "$local_pjs_dir"
-      exec_path="$local_pjs_dir/$1"
-      [[ -f "$exec_path" ]] || echo "npm run $1" > "$exec_path" # TODO: What if this removed itself from the path too?
+      exec_path="$local_pjs_dir/$cmd"
+      # TODO: This method of passing $1 to npm-run is a regression of our easy flag passing feature
+      [[ -f "$exec_path" ]] || echo "rm -rf $pjs_dir; npm run $1" > "$exec_path"
       chmod +x "$exec_path" # It may not be possible to chmod depending on security settings :\
-      export -U PATH=$local_pjs_dir${PATH:+:$PATH} # TODO: Verify export always possible?
+      export -U PATH=$pjs_dir${PATH:+:$PATH} # TODO: Verify export always possible?
     fi
   else
     return
   fi
 }
-
-# TODO: add a hook to remove the path from the PATH
 
 autoload -U add-zsh-hook
 add-zsh-hook preexec _pjshell
