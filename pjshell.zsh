@@ -35,7 +35,7 @@ function _pjshell {
   fi
 
 
-  if [[ ! -n $(command -v zq) ]]; then
+  if [[ ! -n $(command -v jq) ]]; then
     echo 'pjshell: warning - jq not found - is it installed?'
     echo 'disabling pjshell for this session'
     add-zsh-hook -d preexec _pjshell
